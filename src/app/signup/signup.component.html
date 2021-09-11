@@ -1,0 +1,81 @@
+<div class="container-fluid ps-md-0">
+  <div class="row g-0">
+    <div class="d-none d-md-flex col-md-4 col-lg-6 bg-image"></div>
+    <div class="col-md-8 col-lg-6">
+      <div class="login d-flex align-items-center py-5">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-9 col-lg-8 mx-auto">
+              <h3 class="login-heading mb-4">Welcome !!!!</h3>
+
+              <!-- Sign In Form -->
+              <form [formGroup]="signupForm" name="signupForm" (ngSubmit)="onSubmit(template)">
+
+                <div class="d-grid">
+                  <button type="button" class="btn btn-outline-success btn-sm init-btn" (click)="setValueFunction()">setValue()</button>
+                  <button type="button" class="btn btn-outline-success btn-sm" (click)="patchValueFunction()">patchValue()</button>
+                </div>
+
+                <div class="form-floating mb-3">
+                  <label for="floatingInput">FullName</label>
+                  <input [formControlName]="'fullName'" type="text" class="form-control" placeholder="xyz">
+                  <div *ngIf="submitted && f.fullName.errors" class="errorStyle">
+                    <div *ngIf="f.fullName.errors.required">First Name is required</div>
+                  </div>
+                </div>
+                
+                <div class="form-floating mb-3">
+                  <label for="floatingInput">Email address</label>
+                  <input [formControlName]="'email'" type="email" class="form-control" placeholder="name@example.com">
+                  <div *ngIf="submitted && f.email.errors" class="errorStyle">
+                    <div *ngIf="f.email.errors.required">Email is required</div>
+                    <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+                  </div>
+                </div>
+
+                <div class="form-floating mb-3">
+                  <label for="floatingPassword">Password</label>
+                  <input [formControlName]="'password'" type="password" class="form-control" placeholder="Password">
+                  <div *ngIf="submitted && f.password.errors" class="errorStyle">
+                    <div *ngIf="f.password.errors.required">Password is required</div>
+                    <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+                  </div>
+                </div>
+
+                <div class="form-floating mb-3">
+                  <label for="floatingPassword">Confirm Password</label>
+                  <input [formControlName]="'confirmPassword'" type="password" class="form-control" placeholder="Confirm Password">
+                  <div *ngIf="submitted && f.confirmPassword.errors" class="errorStyle">
+                    <div *ngIf="f.confirmPassword.errors.required">Confirm Password is required</div>
+                    <div *ngIf="f.confirmPassword.errors.mustMatch">Passwords must match</div>
+                  </div>
+                </div>
+
+                <div class="d-grid">
+                  <button type="submit" class="btn btn-lg btn-primary btn-login text-uppercase fw-bold mb-2">Sign up</button>
+                </div>
+
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Well Done</h4>
+    <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+      <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Your FullName {{signupForm?.value?.fullName}}</p>
+    <p>Your Email {{signupForm?.value?.email}}</p>
+    <p>Your Password {{signupForm?.value?.password}}</p>
+  </div>
+</ng-template>
